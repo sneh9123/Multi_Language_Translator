@@ -4,7 +4,7 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-IBM_CLOUD_API_KEY = os.getenv("IBM_CLOUD_API_KEY")
+IBM_CLOUD_API_KEY = os.getenv("g7Bg7geyOtMs88GKdCMdfsZu-cGr98d3eL2h4ve1n2C-")
 
 def translate_course_content(user_data, text_content="", document_filename=None, feedback=""):
     """
@@ -210,3 +210,4 @@ def extract_section(text, keyword):
             break
     
     return '\n'.join(section_content) if section_content else f"{keyword.capitalize()} section not found."
+
