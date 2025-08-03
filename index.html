@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Content Translator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-photo/education-day-arrangement-with-copy-space_23-2149031260.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 5vh auto;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .button {
+            display: block;
+            margin: 1.5rem auto 0;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #21689b;
+        }
+        .mic-button {
+            margin-top: 0.5rem;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .language-pair {
+            display: flex;
+            gap: 1rem;
+        }
+        .language-pair > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Multi-language Course Content Translator</h2>
+        <form action="/result" method="post" enctype="multipart/form-data" class="form-box">
+
+            <div class="language-pair">
+                <div>
+                    <label>Source Language:
+                        <select name="source_language" required>
+                            <option value="">Select</option>
+                            <option>English</option>
+                            <option>Hindi</option>
+                            <option>Marathi</option>
+                            <option>Tamil</option>
+                            <option>Bengali</option>
+                            <option>Telugu</option>
+                            <option>Kannada</option>
+                            <option>Gujarati</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label>Target Language:
+                        <select name="target_language" required>
+                            <option value="">Select</option>
+                            <option>Hindi</option>
+                            <option>Marathi</option>
+                            <option>Tamil</option>
+                            <option>Bengali</option>
+                            <option>Telugu</option>
+                            <option>Kannada</option>
+                            <option>Gujarati</option>
+                            <option>English</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            
+            <label>Subject:
+                <select name="subject" required>
+                    <option value="">Select</option>
+                    <option>Mathematics</option>
+                    <option>Science</option>
+                    <option>History</option>
+                    <option>Geography</option>
+                    <option>Literature</option>
+                    <option>Computer Science</option>
+                    <option>Economics</option>
+                    <option>Political Science</option>
+                    <option>Biology</option>
+                    <option>Chemistry</option>
+                    <option>Physics</option>
+                </select>
+            </label>
+            
+            <label>Content Type:
+                <select name="content_type" required>
+                    <option value="">Select</option>
+                    <option>Lecture Notes</option>
+                    <option>Presentation Slides</option>
+                    <option>Textbook Chapter</option>
+                    <option>Assignment</option>
+                    <option>Exam Paper</option>
+                    <option>Study Guide</option>
+                    <option>Research Paper</option>
+                </select>
+            </label>
+
+            <label>Academic Level:
+                <select name="academic_level" required>
+                    <option value="">Select</option>
+                    <option>Primary School</option>
+                    <option>Secondary School</option>
+                    <option>Higher Secondary</option>
+                    <option>Undergraduate</option>
+                    <option>Postgraduate</option>
+                    <option>PhD/Research</option>
+                </select>
+            </label>
+
+            <label>Course Content (Text):
+                <textarea name="text_content" placeholder="Paste your course content here for translation..."></textarea>
+            </label>
+
+            <label>Upload Course Document:
+                <input type="file" name="course_document" accept=".pdf,.doc,.docx,.txt,.ppt,.pptx">
+                <small>Supported formats: PDF, DOC, DOCX, TXT, PPT, PPTX</small>
+            </label>
+            
+            <button type="submit" class="button">Translate Content</button>
+        </form>
+    </div>
+
+    <script>
+    // Voice input functionality for accessibility
+    function startDictation() {
+        const textarea = document.querySelector('textarea[name="text_content"]');
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.start();
+        recognition.onresult = function(event) {
+            const speechResult = event.results[0][0].transcript;
+            textarea.value += speechResult;
+        };
+    }
+    </script>
+</body>
+</html>
